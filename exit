@@ -1,0 +1,29 @@
+[33mcommit e383b3886d2e462d8fa3169807a053d9b206e7d9[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: amirreza-ashrafi-dev <aa090818@yahoo.com>
+Date:   Fri Mar 19 12:20:31 2021 +0330
+
+    sing in form with custom button created
+
+[33mcommit 16fb0cfedcc28cc964a323cf2afe1146af4ed0fb[m
+Author: amirreza-ashrafi-dev <aa090818@yahoo.com>
+Date:   Tue Mar 16 09:25:18 2021 +0330
+
+    adding header component to home,shop page and contact
+
+[33mcommit 94177f22294478337a89365c00bda84c26076b84[m
+Author: amirreza-ashrafi-dev <aa090818@yahoo.com>
+Date:   Mon Mar 15 19:06:04 2021 +0330
+
+    updating our app with a shop page collection preview component and collection atem component
+
+[33mcommit d59fbbff34ae4626451991f76e075e59818d5fc7[m
+Author: amirreza-ashrafi-dev <aa090818@yahoo.com>
+Date:   Sat Mar 13 14:09:43 2021 +0330
+
+    broken our homepage into smaller components, finished styling ouor menu item component
+
+[33mcommit eceedc3663e943c4261aea61f97428bcb82f6cea[m
+Author: amirreza-ashrafi-dev <aa090818@yahoo.com>
+Date:   Fri Mar 12 13:22:34 2021 +0330
+
+    initialize first component and style
