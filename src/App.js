@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Homepage from "./pages/homepage/homepage.component";
 import { Route, Switch } from "react-router-dom";
 import Shoppage from "./pages/shop/shop.component";
@@ -14,52 +14,49 @@ import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.action";
 import { Redirect } from "react-router-dom";
 
-class App extends React.Component {
-  unsubscribeFromAuth = null;
+const App = ({ setCurrentUser, currentUser }) => {
+  const unsubscribeFromAuth = useRef(null);
 
-  componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+  useEffect(() => {
+    unsubscribeFromAuth.current = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUSerProfileDocument(userAuth);
 
         userRef.onSnapshot((snapshot) => {
-          this.props.setCurrentUser({
+          setCurrentUser({
             id: snapshot.id,
             ...snapshot.data(),
           });
         });
       }
-      this.props.setCurrentUser(userAuth);
+      console.log("mounted");
+
+      setCurrentUser(userAuth);
     });
-  }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+    return () => {
+      unsubscribeFromAuth.current();
+      console.log("unmounted");
+    };
+  }, [setCurrentUser]);
 
-  render() {
-    return (
-      <div>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Homepage} />
-          <Route path="/shop" component={Shoppage} />
-          <Route exact path="/checkout" component={Checkout} />
-          <Route
-            path="/signin"
-            render={() =>
-              this.props.currentUser ? (
-                <Redirect to="/" />
-              ) : (
-                <SignInAndSignUppage />
-              )
-            }
-          />
-        </Switch>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={Homepage} />
+        <Route path="/shop" component={Shoppage} />
+        <Route exact path="/checkout" component={Checkout} />
+        <Route
+          path="/signin"
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <SignInAndSignUppage />
+          }
+        />
+      </Switch>
+    </div>
+  );
+};
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
